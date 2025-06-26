@@ -80,16 +80,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     );
   }
 
-  void moveTodoScreen() async {
-    var push = await Navigator.of(context).push(
+  void moveTodoScreen()  {
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
           return TodoListScreen();
         },
       ),
     );
-    if (push != null) {
-      setState(() {});
-    }
+
   }
 }

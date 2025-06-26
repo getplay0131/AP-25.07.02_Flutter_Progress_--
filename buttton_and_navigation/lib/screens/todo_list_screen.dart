@@ -1,3 +1,4 @@
+import 'package:buttton_and_navigation/screens/dash_board_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:buttton_and_navigation/models/todo.dart';
 
@@ -29,6 +30,14 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            print("pop 전: 할일목록 화면");
+            Navigator.pop(context);
+            print("pop 후: 대시보드로 돌아감");
+          },
+          icon: Icon(Icons.backspace_outlined),
+        ),
         title: Text(
           "todos!",
           style: TextStyle(color: Colors.black12, fontSize: 20),
@@ -36,18 +45,30 @@ class _TodoListScreenState extends State<TodoListScreen> {
       ),
       body: ListView.builder(
         itemBuilder: (BuildContext context, int idx) {
-          final todo = widget.todos[idx];
+          Todo todo = widget.todos[idx];
           return Card(
             child: Column(
               children: [
                 Text(todo.title),
+                SizedBox(height: 10),
                 Text(todo.category),
+                SizedBox(height: 10),
                 Text(todo.priority),
+                SizedBox(height: 10),
                 CompletedToggle(
                   isCompleted: todo.isCompleted,
                   onToggle: () {
                     setState(() {
                       todo.isCompleted = !todo.isCompleted;
+                    });
+                  },
+                ),
+                SizedBox(height: 10),
+                priorityBtn(
+                  priority: todo.priority,
+                  onPress: (changePriority) {
+                    setState(() {
+                      todo.priority = changePriority;
                     });
                   },
                 ),
@@ -77,6 +98,7 @@ class _completedToggleState extends State<CompletedToggle> {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: () {
+        widget.onToggle();
         print("완료 상태 변경!");
       },
       child: widget.isCompleted == true ? Icon(Icons.check) : Icon(Icons.close),
@@ -93,20 +115,21 @@ class _completedToggleState extends State<CompletedToggle> {
   }
 }
 
-class priorityButton extends StatefulWidget {
+class priorityBtn extends StatelessWidget {
   String priority;
-  priorityButton({super.key, required this.priority});
 
-  @override
-  State<priorityButton> createState() => _priorityButtonState();
-}
+  final Function(String) onPress;
 
-class _priorityButtonState extends State<priorityButton> {
-  final String top = "top";
+  priorityBtn({super.key, required this.priority, required this.onPress});
+  static const String high = "high";
 
-  final String medium = "medium";
+  static const String medium = "medium";
 
-  final String low = "low";
+  static const String low = "low";
+
+  String returnPriority() {
+    return priority;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +137,30 @@ class _priorityButtonState extends State<priorityButton> {
       child: Row(
         children: [
           TextButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green),
+              foregroundColor: MaterialStateProperty.all(Colors.white),
+            ),
             onPressed: () {
-              setState(() {
-                widget.priority = top;
-              });
+              onPress(high);
             },
-            child: Text(data),
+            child: Text("높음"),
           ),
+          SizedBox(width: 8),
+          TextButton(
+            onPressed: () {
+              onPress(medium);
+            },
+            child: Text("중간"),
+          ),
+          SizedBox(width: 8),
+          TextButton(
+            onPressed: () {
+              onPress(low);
+            },
+            child: Text("낮음"),
+          ),
+          SizedBox(width: 8),
         ],
       ),
     );
