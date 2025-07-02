@@ -7,6 +7,18 @@
       <excludeFolder url="file://$MODULE_DIR$/buttton_and_navigation/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/buttton_and_navigation/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/buttton_and_navigation/build" />
+      <excludeFolder url="file://$MODULE_DIR$/buttton_and_navigation_design_imp/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/buttton_and_navigation_design_imp/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/buttton_and_navigation_design_imp/build" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250619/random_number_generator/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250619/random_number_generator/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250619/random_number_generator/build" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250619/random_number_generator_self/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250619/random_number_generator_self/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250619/random_number_generator_self/build" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250624/random_number_generator_self/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250624/random_number_generator_self/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/date_250624/random_number_generator_self/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -65,7 +65,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
           final pushed = await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return AddTodoScreen(category: "오후", priority: "medium");
+                return AddTodoScreen(category: "오후", priority: "중간");
               },
             ),
           );
@@ -120,18 +120,18 @@ class _TodoListScreenState extends State<TodoListScreen> {
                         },
                       ),
                       SizedBox(height: 10),
-                      // priorityBtn(
-                      //   // 완료 상태 버튼 재사용성을 위해 클래스 호출
-                      //   priority: todo.priority, // 완료 여부 전달
-                      //   onPress: (changePriority) {
-                      //     // 클릭시 함수의 파라미터 값 전달
-                      //     setState(() {
-                      //       // 상태 변경을 위해 세트 스테이트 사용
-                      //       todo.priority = changePriority; // 우선순위 변경
-                      //     });
-                      //     print("${todo.priority}");
-                      //   },
-                      // ),
+                      priorityBtn(
+                        // 완료 상태 버튼 재사용성을 위해 클래스 호출
+                        priority: todo.priority, // 완료 여부 전달
+                        onPress: (changePriority) {
+                          // 클릭시 함수의 파라미터 값 전달
+                          setState(() {
+                            // 상태 변경을 위해 세트 스테이트 사용
+                            todo.priority = changePriority; // 우선순위 변경
+                          });
+                          print("${todo.priority}");
+                        },
+                      ),
                     ],
                   ),
                 );
@@ -198,11 +198,6 @@ class priorityBtn extends StatefulWidget {
 
   // 생성자 통해 값 초기화
   priorityBtn({super.key, required this.priority, required this.onPress});
-  static const String high = "high"; // 범용적 사용을 위해 스태틱 사용 및 콘스트로 값 변경 방지
-
-  static const String medium = "medium";
-
-  static const String low = "low";
 
   @override
   State<priorityBtn> createState() => _priorityBtnState();
@@ -216,64 +211,67 @@ class _priorityBtnState extends State<priorityBtn> {
 
   @override
   Widget build(BuildContext context) {
+    const String high = "높음"; // 범용적 사용을 위해 스태틱 사용 및 콘스트로 값 변경 방지
+
+    const String medium = "중간";
+
+    const String low = "낮음";
+
     print("우선순위: ${widget.priority}");
-    print(widget.onPress);
-    return Expanded(
-      // 사용 가능한 공간 전부 사용
-      child: Row(
-        // 가로 배치
-        children: [
-          TextButton(
-            // 일반 텍스트 버튼 사용
-            // style: ButtonStyle(
-            //   // 버튼 스타일 설정인데 값이 다 권장하지 않는 값이다.
-            //   backgroundColor: MaterialStateProperty.all(Colors.green),
-            //   foregroundColor: MaterialStateProperty.all(Colors.white),
-            // ),
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
-            ),
-            onPressed: () {
-              // 클릭시 익명 함수 활용
-              setState(() {
-                widget.onPress(priorityBtn.high); // 클릭시 파라미터 값 전달
-                returnPriority();
-              });
-            },
-            child: Text("높음"), // 버튼 텍스트 설정
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround, // 버튼 사이 간격 조정
+      // 가로 배치
+      children: [
+        TextButton(
+          // 일반 텍스트 버튼 사용
+          // style: ButtonStyle(
+          //   // 버튼 스타일 설정인데 값이 다 권장하지 않는 값이다.
+          //   backgroundColor: MaterialStateProperty.all(Colors.green),
+          //   foregroundColor: MaterialStateProperty.all(Colors.white),
+          // ),
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
           ),
-          SizedBox(width: 8),
-          TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.yellow,
-              foregroundColor: Colors.white,
-            ),
-            onPressed: () {
-              setState(() {
-                widget.onPress(priorityBtn.medium);
-                returnPriority();
-              });
-            },
-            child: Text("중간"),
+          onPressed: () {
+            // 클릭시 익명 함수 활용
+            setState(() {
+              widget.onPress(high); // 클릭시 파라미터 값 전달
+              returnPriority();
+            });
+          },
+          child: Text("높음"), // 버튼 텍스트 설정
+        ),
+        // SizedBox(width: 8),
+        TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.yellow,
+            foregroundColor: Colors.white,
           ),
-          SizedBox(width: 8),
-          TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.green,
-              foregroundColor: Colors.white,
-            ),
-            onPressed: () {
-              setState(() {
-                widget.onPress(priorityBtn.low);
-                returnPriority();
-              });
-            },
-            child: Text("낮음"),
+          onPressed: () {
+            setState(() {
+              widget.onPress(medium);
+              returnPriority();
+            });
+          },
+          child: Text("중간"),
+        ),
+        // SizedBox(width: 8),
+        TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.white,
           ),
-          SizedBox(width: 8),
-        ],
-      ),
+          onPressed: () {
+            setState(() {
+              widget.onPress(low);
+              returnPriority();
+            });
+          },
+          child: Text("낮음"),
+        ),
+        // SizedBox(width: 8),
+      ],
     );
   }
 }
